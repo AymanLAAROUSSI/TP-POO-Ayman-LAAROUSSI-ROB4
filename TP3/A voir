@@ -1,0 +1,73 @@
+class Media:
+    def __init__(self, titre, auteur, date_parution):
+        self.titre = titre
+        self.auteur = auteur
+        self.date_parution = date_parution
+        self.est_preté = False
+        self.emprunteur = None
+
+    def __str__(self):
+        return f"{self.titre} - {self.auteur}"
+
+    def preter(self, nom_emprunteur):
+        self.est_preté = True
+        self.emprunteur = nom_emprunteur
+
+    def rendre(self):
+        self.est_preté = False
+        self.emprunteur = None
+
+    @classmethod
+    def creer_media(cls, titre, auteur, date_parution):
+        return cls(titre, auteur, date_parution)
+
+
+class Livre(Media):
+    def __init__(self, titre, auteur, date_parution, nombre_pages, editeur):
+        super().__init__(titre, auteur, date_parution)
+        self.nombre_pages = nombre_pages
+        self.editeur = editeur
+
+    @classmethod
+    def creer_media(cls, titre, auteur, date_parution, nombre_pages, editeur):
+        return cls(titre, auteur, date_parution, nombre_pages, editeur)
+
+
+class CD(Media):
+    def __init__(self, titre, auteur, date_parution, duree, nombre_morceaux):
+        super().__init__(titre, auteur, date_parution)
+        self.duree = duree
+        self.nombre_morceaux = nombre_morceaux
+
+    @classmethod
+    def creer_media(cls, titre, auteur, date_parution, duree, nombre_morceaux):
+        return cls(titre, auteur, date_parution, duree, nombre_morceaux)
+
+
+class DVD(Media):
+    def __init__(self, titre, auteur, date_parution, duree):
+        super().__init__(titre, auteur, date_parution)
+        self.duree = duree
+
+    @classmethod
+    def creer_media(cls, titre, auteur, date_parution, duree):
+        return cls(titre, auteur, date_parution, duree)
+
+
+class ArticleMagazine(Media):
+    def __init__(self, titre, auteur, date_parution, nom_magazine, numero_magazine, intervalle_pages):
+        super().__init__(titre, auteur, date_parution)
+        self.nom_magazine = nom_magazine
+        self.numero_magazine = numero_magazine
+        self.intervalle_pages = intervalle_pages
+
+    @classmethod
+    def creer_media(cls, titre, auteur, date_parution, nom_magazine, numero_magazine, intervalle_pages):
+        return cls(titre, auteur, date_parution, nom_magazine, numero_magazine, intervalle_pages)
+
+# Exemple d'utilisation :
+livre = Livre.creer_media("Le Seigneur des Anneaux", "J.R.R. Tolkien", "1954", 1178, "Houghton Mifflin")
+cd = CD.creer_media("Thriller", "Michael Jackson", "1982", "42 minutes", 9)
+dvd = DVD.creer_media("Inception", "Christopher Nolan", "2010", "148 minutes")
+article = ArticleMagazine.creer_media("Titre de l'article", "Auteur de l'article", "2023", "Magazine XYZ", "123", "20-25")
+
